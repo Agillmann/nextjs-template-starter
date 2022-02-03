@@ -1,0 +1,21 @@
+version: '3.9'
+services:
+  app:
+    container_name: app
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    networks:
+      - app_network
+  nginx:
+    container_name: nginx
+    build:
+      context: ./_nginx
+      dockerfile: Dockerfile
+    ports:
+      - 80:80
+    networks:
+      - app_network
+networks:
+  app_network:
+    driver: bridge
